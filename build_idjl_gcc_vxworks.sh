@@ -16,7 +16,7 @@ export SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && p
 export INSTALL_PATH=${SCRIPTPATH}/install
 export TARGET=i586-wrs-vxworks
 export CONFIGURATION_OPTIONS="--enable-threads=posix --disable-multilib --disable-libssp --disable-libquadmath --disable-libquadmath-support --enable-libstdcxx --disable-libstdcxx-pch --disable-libitm --disable-libcc1 --with-native-system-header-dir=${SCRIPTPATH}/wrs-vxworks-headers/sys-include"
-export PARALLEL_MAKE=-j4
+export PARALLEL_MAKE=-j20
 BINUTILS_VERSION=binutils-2.30
 export GCC_VERSION=gcc-7.3.0
 MPFR_VERSION=mpfr-4.0.1
@@ -40,7 +40,7 @@ wget -nc ftp://gcc.gnu.org/pub/gcc/infrastructure/$CLOOG_VERSION.tar.gz
 # Download VxWorks headers 
 # See https://aur.archlinux.org/packages/wrs-vxworks-headers/
 # See https://github.com/rbmj/wrs-headers-installer 
-wget -nc ftp://ftp.ni.com/pub/devzone/tut/updated_vxworks63gccdist.zip
+wget -nc http://ftp.ni.com/pub/devzone/tut/updated_vxworks63gccdist.zip
 
 # Extract VxWorks headers 
 unzip -o updated_vxworks63gccdist.zip
@@ -66,7 +66,7 @@ rm -rf ./$BINUTILS_VERSION
 rm -rf ./$GCC_VERSION
 
 # Extract everything
-for f in *.tar*; do tar xfk $f; done
+for f in *.tar*; do tar -xvf $f; done
 
 # Make symbolic links
 cd $GCC_VERSION
