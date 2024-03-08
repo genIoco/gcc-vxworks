@@ -1,0 +1,11 @@
+gccdist/*
+gmp-*/*
+isl*/*
+mpfr*/*
+mpc*/*
+gcc*/*
+binutils*/*
+cloog*/*
+install/*
+build*/*
+wrs-vxworks-headers/*
