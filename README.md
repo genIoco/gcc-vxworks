@@ -1,4 +1,4 @@
-# idjl-vxworks-gcc
+# gcc-vxworks
 Helpers script to compile a version of GCC that crosscompiles to VxWorks. 
 
 Table of Contents
@@ -19,17 +19,17 @@ To install the compiler, you can download the binaries at https://github.com/iit
 
 To use the GCC-based VxWorks compiler, open the Git bash and source the `setup.sh` file:
 ~~~
-source /path/where/you/downloaded/idjl-gcc-vxworks/setup.sh
+source /path/where/you/downloaded/gcc-vxworks/setup.sh
 ~~~
 Note that for any new terminal in which you want to run the compiler, you need to source the `setup.sh` script again. 
 To source the script automatically, you can create a `.bash_profile` file in your home and add the source command there. 
 
 
-To generate a CMake project that target VxWorks, create a `build-vxworks` directory and pass `idjl_vxworks_toolchain.cmake` as the [`CMAKE_TOOLCHAIN_FILE`](https://cmake.org/cmake/help/v3.10/variable/CMAKE_TOOLCHAIN_FILE.html) option, using the `Ninja` generator.
+To generate a CMake project that target VxWorks, create a `build-vxworks` directory and pass `vxworks_toolchain.cmake.in` as the [`CMAKE_TOOLCHAIN_FILE`](https://cmake.org/cmake/help/v3.10/variable/CMAKE_TOOLCHAIN_FILE.html) option, using the `Ninja` generator.
 ~~~
 mkdir build-vxworks
 cd build-vxworks
-cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=/path/where/you/downloaded/idjl-gcc-vxworks/idjl_vxworks_toolchain.cmake /path/of/the/cmake/project/srcs 
+cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=/path/where/you/downloaded/gcc-vxworks/vxworks_toolchain.cmake.in /path/of/the/cmake/project/srcs 
 ~~~
 then, you can compile your code using the `ninja` command:
 ~~~
@@ -52,13 +52,13 @@ pacman -S base-devel git mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake unzip
 
 After the installation terminates successfully, open a new `MSYS2 MinGW 64-bit` terminal to make sure that all the installed packages are available, and clone the repo and run the script:
 ~~~
-git clone https://github.com/iit-danieli-joint-lab/idjl-gcc-vxworks
-cd  idjl-gcc-vxworks
-./build_idjl_gcc_vxworks.sh 
+git clone https://github.com/genIoco/gcc-vxworks
+cd  gcc-vxworks
+./build_gcc_vxworks.sh 
 ~~~
 the build can take some time (up to one hour). 
 If the build ends successfully (i.e. it prints  'Success!' at the end of the output), then the compiler and related tools are 
-installed in the `idjl-gcc-vworks/install` directory and ready to be used. 
+installed in the `gcc-vxworks/install` directory and ready to be used. 
 
 To prepare a new release that can be used as described in the [previous section](#installation-from-binaries-and-usage), you just need to zip the the `install` directory, renaming the directory `idjl-gcc-vxworks-windows-x64` and naming the `.zip` file `idjl-gcc-vxworks-windows-x64.zip`.
 
@@ -84,13 +84,13 @@ sudo apt install \
 
 Clone this repository and cd in the directory:
 ~~~
-git clone https://github.com/iit-danieli-joint-lab/idjl-gcc-vxworks
-cd  idjl-gcc-vxworks
+git clone https://github.com/genIoco/gcc-vxworks
+cd  gcc-vxworks
 ~~~
 
 Launch the building script (warning: the build can take more than an hour. To avoid losing time if there are problems and the build needs to restart, it is recommended to use [ccache](https://ccache.samba.org/)):
 ~~~
-./build_idjl_gcc_vxworks.sh 
+./build_gcc_vxworks.sh 
 ~~~
 
 If the build ends successfully (i.e. it prints  'Success!' at the end of the output), then the compiler is ready to be used. 
@@ -102,4 +102,4 @@ If then compiling you get the error:
 ~~~
 i586-wrs-vxworks-gcc: fatal error: environment variable ‘WIND_BASE’ not defined
 ~~~
-that means that in that terminal the `WIND_BASE` env variables is not defined, so you need to source the `idjl-gcc-vxworks/setup.sh` script again.
+that means that in that terminal the `WIND_BASE` env variables is not defined, so you need to source the `gcc-vxworks/setup.sh` script again.
